@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+        <text>top</text>
+
+    </category>
+  </question>
+
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+        <text>top/all</text>
+
+    </category>
+  </question>
+
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+        <text>top/all/dev</text>
+
+    </category>
+  </question>
+
+<!-- question: 816  -->
+  <question type="stack">
+    <name>
+      <text>SVOタイプランダムMC出題</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p></p><p>事実であるものを選びなさい.</p><p>[[input:ans1]] [[validation:ans1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>0.1000000</defaultgrade>
+    <penalty>0.1000000</penalty>
+    <hidden>0</hidden>
+    <stackversion>
+      <text>2018080600</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[nwrong:3
+correctans:[["の首都は","アメリカ","ワシントン"],["の首都は","日本","東京"],["の首都は","フランス","パリ"],["の位置する地方は","アメリカ","北アメリカ"],["の位置する地方は","日本","アジア"],["の位置する地方は","フランス","ヨーロッパ"],["の位置する地方は","","南極"]]
+/*wrongans:create_list([s,c],s,uique(map(first,correctans)),c,unique(map(second,correctans))); "this does not work" */
+allv:unique(map(first,correctans))
+allans:[]
+dummy:for v in allv do block([alls,allo],subans:sublist(correctans,lambda([item],first(item)=v)),alls:unique(map(second,subans)),allo:unique(map(third,subans)),allans:append(allans,lreduce(join,makelist(makelist([alls[i],v,allo[j]],j,1,length(allo)),i,1,length(alls)))))
+correctans0:makelist([correctans[i][2],correctans[i][1],correctans[i][3]],i,1,length(correctans))
+wrongans:listify(setdifference(setify(allans),setify(correctans0)))
+truecorrectans:sublist(correctans0, lambda([item], not(first(item)="" or third(item)="" )))
+[ta,version]:multiselqnalpha(truecorrectans,1,wrongans,nwrong)
+correctitem:args(mcq_correct(ta))
+]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text>[[feedback:prt1]]</text>
+    </specificfeedback>
+    <questionnote>
+      <text>{@ta@}</text>
+    </questionnote>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text>すばらしい。正解です!</text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text>惜しい！部分的に正解です。</text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text>残念，間違いです。</text>
+    </prtincorrect>
+    <multiplicationsign>dot</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <matrixparens>[</matrixparens>
+    <variantsselectionseed></variantsselectionseed>
+    <input>
+      <name>ans1</name>
+      <type>radio</type>
+      <tans>ta</tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint></syntaxhint>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords></forbidwords>
+      <allowwords></allowwords>
+      <forbidfloat>1</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>1</showvalidation>
+      <options></options>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackvariables>
+        <text></text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <answertest>AlgEquiv</answertest>
+        <sans>[ans1]</sans>
+        <tans>mcq_correct(ta)</tans>
+        <testoptions></testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1.0000000</truescore>
+        <truepenalty></truepenalty>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty></falsepenalty>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text></text>
+        </falsefeedback>
+      </node>
+    </prt>
+  </question>
+
+</quiz>

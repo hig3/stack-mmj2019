@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+        <text>top</text>
+
+    </category>
+  </question>
+
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+        <text>top/all</text>
+
+    </category>
+  </question>
+
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+        <text>top/all/dev</text>
+
+    </category>
+  </question>
+
+<!-- question: 819  -->
+  <question type="stack">
+    <name>
+      <text>カイ二乗検定(両側,レポート用)</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p>あるキャンドル工場の作るキャンドルの重さはほぼ正規分布にしたがうことがわかっており, 母分散は商品の仕様で {@sigma*sigma@} g<sup>2</sup>とされている. しかし, 品質管理係のあなたは, 実際の母分散は異なっているのではないか, と疑い, 検査のために, 標本を抽出したところ次のようになった.</p><p>\[{@sample@}\]<br></p><p>帰無仮説を, \(\sigma={@sigma@}\) として, 有意水準\(\alpha={@alpha@}\)の(両側)カイ二乗検定を行い, 授業で説明したすべてのステップを記述すること.<br></p><p>Excelを利用してもよい. Excelのデータ&gt;データ分析&gt;基本統計量で表示される平均,標準偏差は, 標本平均値, 不偏標本標準偏差である.<br></p><p>解答欄には1と入力しておくこと. 人間が採点するまでは0点と表示される.</p><p>[[input:ans1]][[validation:ans1]]</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.1000000</penalty>
+    <hidden>0</hidden>
+    <stackversion>
+      <text>2018080600</text>
+    </stackversion>
+    <questionvariables>
+      <text><![CDATA[a:rand([0,1])
+alpha:(1-a)*0.05+a*0.01
+n: 10+rand(6)
+mu:95+rand(10)
+mudiff:0
+sigma:4+rand(10)
+sigmadiff:rand_with_prohib(-3,5,[])
+s:sigma+sigmadiff
+/*sample:makelist(floor(mu+sqrt(3)*(s)*(rand(2.0)-1)),n)*/
+sample:round(random_normal(mu,s,n))
+smean:round(lsum(x,x,sample)/n*1000.0)/1000.0
+/*smean:mean(sample) shoudl be fine */
+sdev:round(std1(sample)*1000.0)/1000.0
+chi:round((sdev*sdev)/(sigma*sigma)*(n-1)*1000.0)/1000.0
+chiupperc:round(quantile_chi2(1-alpha/2,n-1)*1000.0)/1000.0
+chilowerc:round(quantile_chi2(alpha/2,n-1)*1000.0)/1000.0
+p:round(min(1-cdf_chi2(chi,n-1),cdf_chi2(chi,n-1))*1000.0)/1000.0
+reject: is( (chi-chilowerc)*(chi-chiupperc)>0 )
+accept: is( (chi-chilowerc)*(chi-chiupperc)<0 )
+]]></text>
+    </questionvariables>
+    <specificfeedback format="html">
+      <text>[[feedback:prt1]]</text>
+    </specificfeedback>
+    <questionnote>
+      <text>{@float([alpha,n,mu,sigma,sigmadiff,sigma+sigmadiff,smean,sdev*sdev,chi,chilowerc,chiupperc,p,reject])@}</text>
+    </questionnote>
+    <questionsimplify>1</questionsimplify>
+    <assumepositive>0</assumepositive>
+    <assumereal>0</assumereal>
+    <prtcorrect format="html">
+      <text>正解です.</text>
+    </prtcorrect>
+    <prtpartiallycorrect format="html">
+      <text>正しい部分もありますが, 正解ではありません.</text>
+    </prtpartiallycorrect>
+    <prtincorrect format="html">
+      <text>正解ではありません.</text>
+    </prtincorrect>
+    <multiplicationsign>dot</multiplicationsign>
+    <sqrtsign>1</sqrtsign>
+    <complexno>i</complexno>
+    <inversetrig>cos-1</inversetrig>
+    <matrixparens>(</matrixparens>
+    <variantsselectionseed></variantsselectionseed>
+    <input>
+      <name>ans1</name>
+      <type>algebraic</type>
+      <tans><![CDATA[["a",alpha,"n",n,"parmu",mu,"s",sigma,"ds",sigmadiff,"s+ds",sigma+sigmadiff,"m",smean,"S2",sdev*sdev,"parchi",chi,"chi0",chilowerc,"chi1",chiupperc,"p",p,"AorR",accept]]]></tans>
+      <boxsize>15</boxsize>
+      <strictsyntax>1</strictsyntax>
+      <insertstars>0</insertstars>
+      <syntaxhint></syntaxhint>
+      <syntaxattribute>0</syntaxattribute>
+      <forbidwords></forbidwords>
+      <allowwords></allowwords>
+      <forbidfloat>0</forbidfloat>
+      <requirelowestterms>0</requirelowestterms>
+      <checkanswertype>0</checkanswertype>
+      <mustverify>1</mustverify>
+      <showvalidation>1</showvalidation>
+      <options></options>
+    </input>
+    <prt>
+      <name>prt1</name>
+      <value>1.0000000</value>
+      <autosimplify>1</autosimplify>
+      <feedbackvariables>
+        <text></text>
+      </feedbackvariables>
+      <node>
+        <name>0</name>
+        <answertest>AlgEquiv</answertest>
+        <sans>ans1</sans>
+        <tans>1029</tans>
+        <testoptions>0</testoptions>
+        <quiet>0</quiet>
+        <truescoremode>=</truescoremode>
+        <truescore>1.0000000</truescore>
+        <truepenalty></truepenalty>
+        <truenextnode>-1</truenextnode>
+        <trueanswernote>prt1-1-T</trueanswernote>
+        <truefeedback format="html">
+          <text></text>
+        </truefeedback>
+        <falsescoremode>=</falsescoremode>
+        <falsescore>0.0000000</falsescore>
+        <falsepenalty></falsepenalty>
+        <falsenextnode>-1</falsenextnode>
+        <falseanswernote>prt1-1-F</falseanswernote>
+        <falsefeedback format="html">
+          <text></text>
+        </falsefeedback>
+      </node>
+    </prt>
+  </question>
+
+</quiz>
