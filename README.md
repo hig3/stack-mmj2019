@@ -1,4 +1,4 @@
-# stack-mmj2019
+# Generating families of questions with STACK
 Examples of STACK type questions for Moodle
 
 Supplement material to a presentation at MoodleMoot Japan 2019
